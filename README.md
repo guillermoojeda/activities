@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+# Midas Challenge
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Packages installed:
+MUI:
+npm install @mui/material @mui/icons-material @emotion/styled @emotion/react
+
+Routing:
+npm install react-router-dom localforage match-sorter sort-by
+
+Formik:
+npm install formik
+npm install yup
 
 ## Available Scripts
 
