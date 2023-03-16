@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 
 import TextInput from '../../shared_components/TextInput';
 
@@ -52,52 +55,71 @@ const SignUpForm = () => {
             setSubmitting(false);
           }, 400);
         }}
-      >
-        <Form>
-          <TextInput
-            label="First Name"
-            name="firstName"
-            type="text"
-            placeholder="Jane"
-          />
+      > 
+        
+          <Form>
+            <Card
+              variant="outlined"
+              maxWidth="xs"
+              sx={{
+                marginTop: 8,
+                margin: '20px',
+                padding: '10px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderWidth: 'solid',
+              }}
+            >
+              <TextInput
+                label="First Name"
+                name="firstName"
+                type="text"
+                placeholder="Jane"
+              />
 
-          <TextInput
-            label="Last Name"
-            name="lastName"
-            type="text"
-            placeholder="Doe"
-          />
+              <TextInput
+                label="Last Name"
+                name="lastName"
+                type="text"
+                placeholder="Doe"
+              />
 
-          <TextInput
-            label="Age"
-            name="age"
-            type="number"
-            placeholder="jane@formik.com"
-          />
+              <TextInput
+                label="Age"
+                name="age"
+                type="number"
+                placeholder="jane@formik.com"
+              />
 
-          <TextInput
-            label="Email Address"
-            name="email"
-            type="email"
-            placeholder="jane@formik.com"
-          />
+              <TextInput
+                label="Email Address"
+                name="email"
+                type="email"
+                placeholder="jane@formik.com"
+              />
 
-          <TextInput
-            label="Password"
-            name="password"
-            type="password"
-            placeholder="jane@formik.com"
-          />
+              <TextInput
+                label="Password"
+                name="password"
+                type="password"
+                placeholder="jane@formik.com"
+              />
 
-          <TextInput
-            label="Confirm password"
-            name="confirmPassword"
-            type="password"
-            placeholder="jane@formik.com"
-          />
+              <TextInput
+                label="Confirm password"
+                name="confirmPassword"
+                type="password"
+                placeholder="jane@formik.com"
+              />
 
-          <button type="submit">Submit</button>
-        </Form>
+              <Button type="submit" variant="contained">Submit</Button>
+            </Card>
+          </Form>
+          
+        
+        
       </Formik>
     </>
   );

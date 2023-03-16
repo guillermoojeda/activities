@@ -1,11 +1,16 @@
 import { useField } from 'formik';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
-const MyTextInput = ({ label, ...props }) => {
+const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
       <label htmlFor={props.id || props.name}>{label}</label>
-      <input className="text-input" {...field} {...props} />
+      <TextField fullWidth className="text-input" {...field} {...props} sx={{
+        paddingBottom: "20px",
+      }} 
+      />
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
       ) : null}
@@ -13,4 +18,4 @@ const MyTextInput = ({ label, ...props }) => {
   );
 };
 
-export default MyTextInput;
+export default TextInput;
