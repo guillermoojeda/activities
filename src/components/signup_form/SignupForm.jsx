@@ -5,16 +5,40 @@ import * as Yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
 
 import TextInput from '../../shared_components/TextInput';
 
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // 1 numeric digit, 1 lower case letter, 1 upper case letter, 5 chars minimum.
 
+const centeredBox = {
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  marginTop: {
+    xs: '0',
+    sm: '2.5rem',
+    md: '5rem',
+  },
+  width: {
+    xs: '100%',
+    sm: '75%',
+    md: '50%',
+  },
+  maxWidth: '40rem',
+  border: '3px solid green',
+  padding: '10px',
+}
+
+// centeredTitle = {
+
+// }
+
 const SignUpForm = () => {
   return (
-    <>
-      <h1>Welcome to Midas Challenge!!!</h1>
+    <Box sx={centeredBox}>
+      <Typography variant="h4" align="center">Welcome to Midas Challenge!!!</Typography>
+      <Typography variant="body1" align="center">Create your user by submitting the required info.</Typography>
       <Formik
         initialValues={{
           firstName: '',
@@ -56,14 +80,14 @@ const SignUpForm = () => {
           }, 400);
         }}
       > 
-        
-          <Form>
-            <Card
+        <Card
               variant="outlined"
-              maxWidth="xs"
               sx={{
-                marginTop: 8,
-                margin: '20px',
+                marginTop: '20px',
+                marginBottom: '20px',
+                margin: 'auto',
+                borderRadius: '20px,',
+                maxWidth: '30rem',
                 padding: '10px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -71,7 +95,9 @@ const SignUpForm = () => {
                 alignItems: 'center',
                 borderWidth: 'solid',
               }}
-            >
+        >
+          <Form>
+            
               <TextInput
                 label="First Name"
                 name="firstName"
@@ -113,15 +139,13 @@ const SignUpForm = () => {
                 type="password"
                 placeholder="jane@formik.com"
               />
-
-              <Button type="submit" variant="contained">Submit</Button>
-            </Card>
+                <Box textAlign='center'>
+                  <Button type="submit" variant="contained">Submit</Button>
+                </Box>
           </Form>
-          
-        
-        
+        </Card>
       </Formik>
-    </>
+    </Box>
   );
 };
 
