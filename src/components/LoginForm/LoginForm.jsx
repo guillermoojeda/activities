@@ -5,8 +5,10 @@ import * as Yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
+import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
+import Copyright from '../Copyright/Copyright';
 import TextInput from '../../shared_components/TextInput';
 
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
@@ -30,15 +32,28 @@ const centeredBox = {
   padding: '10px',
 }
 
+const CardStyle = {
+  margin: 'auto',
+  marginTop: '1rem',
+  borderRadius: '20px,',
+  maxWidth: '30rem',
+  padding: '1rem',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderWidth: 'solid',
+}
+
 // centeredTitle = {
 
 // }
 
-const SignUpForm = () => {
+const LoginForm = () => {
   return (
     <Box sx={centeredBox}>
-      <Typography variant="h4" align="center">Welcome to Midas Challenge!!!</Typography>
-      <Typography variant="body1" align="center">Create your user by submitting the required info.</Typography>
+      <Typography variant="h4" align="center">Welcome to Do Something!!!</Typography>
+      <Typography variant="body1" align="center">Log in.</Typography>
       <Formik
         initialValues={{
           firstName: '',
@@ -67,7 +82,12 @@ const SignUpForm = () => {
             .email('Invalid email address')
             .required('Required'),
           password: Yup.string()
-            .matches(passwordRules, { message: "Please create a stronger password" })
+            .matches(passwordRules, { 
+              message: 'Password insecure -- please include:\n' +
+               "- at least 5 characters\n" +
+               "- an uppercase letter\n" +
+               "- lowercase letter and a number",
+              })
             .required("Required"),
           confirmPassword: Yup.string()
             .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -82,43 +102,9 @@ const SignUpForm = () => {
       > 
         <Card
               variant="outlined"
-              sx={{
-                marginTop: '20px',
-                marginBottom: '20px',
-                margin: 'auto',
-                borderRadius: '20px,',
-                maxWidth: '30rem',
-                padding: '10px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderWidth: 'solid',
-              }}
+              sx={CardStyle}
         >
           <Form>
-            
-              <TextInput
-                label="First Name"
-                name="firstName"
-                type="text"
-                placeholder="Jane"
-              />
-
-              <TextInput
-                label="Last Name"
-                name="lastName"
-                type="text"
-                placeholder="Doe"
-              />
-
-              <TextInput
-                label="Age"
-                name="age"
-                type="number"
-                placeholder="jane@formik.com"
-              />
-
               <TextInput
                 label="Email Address"
                 name="email"
@@ -132,21 +118,18 @@ const SignUpForm = () => {
                 type="password"
                 placeholder="jane@formik.com"
               />
-
-              <TextInput
-                label="Confirm password"
-                name="confirmPassword"
-                type="password"
-                placeholder="jane@formik.com"
-              />
-                <Box textAlign='center'>
-                  <Button type="submit" variant="contained">Submit</Button>
-                </Box>
+              <Box textAlign='center'>
+                <Button type="submit" variant="contained" sx={{marginTop: '1rem'}}>Login</Button>
+              </Box>
           </Form>
         </Card>
       </Formik>
+      <Typography variant="body2" align="center">Need to create an account? 
+        <Link color='primary' href='/signup'>Sign up.</Link>
+      </Typography>
+      <Copyright />
     </Box>
   );
 };
 
-export default SignUpForm;
+export default LoginForm;

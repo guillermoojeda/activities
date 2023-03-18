@@ -1,0 +1,7 @@
+.error {
+  color: red;
+  font-size: 0.8rem;
+  word-break: break-word;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+}
