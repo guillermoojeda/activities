@@ -1,0 +1,5 @@
+.lowerHalf {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
