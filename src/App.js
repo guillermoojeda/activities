@@ -14,10 +14,11 @@ function App() {
           // backgroundImage: 'url(https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg)',
           backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0NlIBVhpWQUFer-h0c1_eOXkB63wwdv29kvm32Pgvjg&s)',
           width: '100%',
-          height: '100vh', 
+          minHeight: '100vh',
+          height: '100%', 
           border: '1px solid black',
           boxizing: 'border-box',
-          display: 'flex'
+          display: 'flex',
           // backgroundImage: 'url(https://source.unsplash.com/random)',
           // backgroundRepeat: 'repeat',
       }}>

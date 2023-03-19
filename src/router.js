@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 
 // import './index.css';
+import ActivitiesList from './components/ActivitiesList/ActivitiesList';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 // import { action as destroyAction } from '../routes/destroy';
 import Root from "./routes/Root";
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
       }, 
       {
         path: "activities/",
-        element: <div>Activities To Do placedholder</div>,
+        element: <ActivitiesList/>,
         // loader: contactLoader, // Should create its own function, although it works as contactLoader in this case.
         // action: editAction,
       },
