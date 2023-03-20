@@ -14,11 +14,6 @@ import ActTable from './ActTable';
 
 export default function ActivitiesList(){
 
-  const userData= {
-    name: 'Guillermo',
-    age: '37'
-  }
-
   const btnStyle = {
     fontSize:'1.1rem',
     margin: '1rem',

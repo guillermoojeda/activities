@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,12 +10,52 @@ import { motion } from 'framer-motion';
 import Card from "../../shared_components/Card"
 import "./UserDetails.css"
 
+import { addActivity } from "../../databaseMock/actions";
 
 export default function UserDetails(){
 
-  const userData= {
-    name: 'Guillermo',
-    age: '37'
+  const [isLoading, setIsLoading] = useState(false);
+  const [activity, setActivity] = useState({
+    activity: "Loading activity...",
+    type: "Loading...",
+    participants: 0,
+    price: 0,
+    link: "Loading...",
+    key: "Loading...",
+    accessibility: "Loading..."
+  });
+
+  const [userData, setUserData] = useState(
+    JSON.parse(window.localStorage.user)
+  )
+
+  const refresh = async() => {
+    setIsLoading(true);
+    fetch('http://www.boredapi.com/api/activity')
+    .then((response) => response.json())
+    .then((newActivity) => {
+      console.log(newActivity);
+      setActivity(newActivity);
+    })
+  }
+
+  useEffect(() => {
+    refresh();
+    setIsLoading(false);
+  }, [])
+
+  function addToList() {
+    const loggedUser = JSON.parse(window.localStorage.user);
+    if (loggedUser) {
+      const userEmail = loggedUser.email;
+      console.log(userEmail);
+      console.log(activity);
+      const newActivities = addActivity(userEmail, activity).activitiesUpdated;
+      // window.localStorage['activities'] = JSON.stringify(newActivities);
+      window.localStorage.setItem('activities', JSON.stringify(newActivities));
+    } else {
+      console.log('Error: no usermail on session data found')
+    }
   }
 
   const btnStyle = {
@@ -79,10 +120,26 @@ export default function UserDetails(){
 
       <Box className="lowerHalf">
 
-        <Card></Card>
+        <Card {...activity}></Card>
         <Box className="buttonsContainer">
-          <Button className="OptionBtn" size="large" variant="contained" sx={btnStyle}>Add to List</Button>
-          <Button className="OptionBtn" size="large" variant="contained" sx={btnStyle}>Refresh</Button>
+          <Button 
+            className="OptionBtn"
+            size="large"
+            variant="contained"
+            sx={btnStyle}
+            onClick={addToList}
+          >
+            Add to List
+          </Button>
+          <Button 
+            className="OptionBtn"
+            size="large"
+            variant="contained"
+            sx={btnStyle}
+            onClick={refresh}
+          >
+            Refresh
+          </Button>
         </Box>
       </Box>
     </Paper>

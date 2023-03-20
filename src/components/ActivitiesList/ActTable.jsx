@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -8,19 +9,55 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { getActivities, deleteActivity } from "../../databaseMock/actions";
 
 function createData(activity, type, participants) {
   return { activity, type, participants };
 }
 
 const rows = [
-  createData('Run', 'Sport', 1),
-  createData('Cook', 'Food', 1),
-  createData('Dinner', 'Food', 2),
-  createData('Movie', 'Social', 1),
+  createData('Loading...', 'Loading...', 'Loading...'),
 ];
 
 export default function ActTable() {
+
+  const [data, setData] = useState(
+    [
+      {
+        activity: "Loading...",
+        type: "Loading...",
+        participants: 'Loading...',
+      },
+    ]
+  );
+  const userEmail = JSON.parse(window.localStorage.user).email
+
+  const mockFetchData = async() => {
+    const newData =getActivities(userEmail).activities;
+    console.log(newData);
+    setData(newData);
+    console.log(data);
+    window.localStorage.setItem('activities', JSON.stringify(newData));
+  }
+
+  console.log(getActivities(userEmail).activities);
+
+  useEffect(() => {
+    mockFetchData();
+  }, []);
+
+  console.log(data);
+
+  function removeActivity(event) {
+    console.log(event);
+    const ans = deleteActivity(userEmail, event);
+    const newData = ans.activities;
+    setData(newData);
+    window.localStorage.setItem('activities', JSON.stringify(newData));
+  }
+
+
+
   return (
     <TableContainer>
       <Table sx={{ minWidth: 550 }}>
@@ -33,20 +70,21 @@ export default function ActTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((activity) => (
             <TableRow
-              key={row.activity}
+              key={activity.activity}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell align="center">{row.activity}</TableCell>
-              <TableCell align="center">{row.type}</TableCell>
-              <TableCell align="center">{row.participants}</TableCell>
+              <TableCell align="center">{activity.activity}</TableCell>
+              <TableCell align="center">{activity.type}</TableCell>
+              <TableCell align="center">{activity.participants}</TableCell>
               <TableCell align="center" padding="checkbox">
                 <Button 
                   variant="contained"
                   color="error"
                   startIcon={<DeleteIcon />}
                   sx={{marginLeft:'0rem', marginRight:'3rem'}}
+                  onClick={() => removeActivity(activity.activity)}
                 >
                   Remove
                 </Button>

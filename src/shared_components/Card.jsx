@@ -5,16 +5,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function ActivityCard() {
-
-  const activityDetails = {
-    activity: "Solve a Rubik's cube",
-    type: 'Social',
-    participants: 6,
-  }
+export default function ActivityCard(activityDetails) {
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: '340px' }}>
       <CardMedia
         component="img"
         alt="green iguana"
@@ -22,12 +16,11 @@ export default function ActivityCard() {
         image="https://www.randomlists.com/img/animals/snowy_owl.webp"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {activityDetails.activity}
+        <Typography gutterBottom variant="h6" component="div">
+          Description
         </Typography>
         <Typography sx={{marginBottom:'.8rem'}} variant="body2" color="text.secondary">
-          This is some activity text. This is some activity text. This is some activity text.
-          This is some activity text. This is some activity text.
+          {activityDetails.activity}
         </Typography>
         <Typography gutterBottom variant="h6" component="div">
           Type: {activityDetails.type}
