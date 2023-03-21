@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, useField } from 'formik';
@@ -8,6 +8,8 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import { centeredBox, CardStyle } from './muiStylesObjects';
 import Copyright from '../Copyright/Copyright';
@@ -18,14 +20,30 @@ import { requestAccess } from '../../databaseMock/actions';
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // 1 numeric digit, 1 lower case letter, 1 upper case letter, 5 chars minimum.
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const LoginForm = () => {
 
+  const [snackOpen, setSnackOpen] = useState(false);
+
+  const [ans, setAns] = useState({});
+  const [outcome, setOutcome] = useState('info')
+
   const navigate = useNavigate();
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackOpen(false);
+  };
 
   const submitAction = async (loginData) => {
     const ans = await requestAccess(loginData);
-    console.log(ans)
+    setAns(ans);
+    console.log(ans.message);
     if (ans.success) {
       console.log('Succesful login');
       const { name, lastname, email, age, activities } = ans.userData;
@@ -38,9 +56,12 @@ const LoginForm = () => {
       window.localStorage.setItem('user', JSON.stringify(user));
       window.localStorage.setItem('activities', JSON.stringify(user));
       navigate("/app/home");
+    } else {
+      setSnackOpen(true);
+      setOutcome('error');
+      console.log(ans.message);
+      return 'Error';
     }
-    console.log(ans.message);
-    return 'Error';
   };
 
   return (
@@ -57,6 +78,11 @@ const LoginForm = () => {
           email: '',
           password: '',
         }}
+        validationSchema={Yup.object({
+          email: Yup.string()
+            .email('Invalid email address')
+            .required('Required'),
+        })}
         onSubmit={(values, {setSubmitting}) => {
           setTimeout(() => { // we simulate async call
             setSubmitting(false);
@@ -90,6 +116,24 @@ const LoginForm = () => {
           </Form>
         </Card>
       </Formik>
+      <Snackbar 
+        open={snackOpen} 
+        autoHideDuration={4000} 
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        sx={{minWidth:'80vw'}}
+      >
+        <Alert onClose={handleClose} severity={outcome} sx={{ width: '100%' }}>
+          {
+            outcome === 'success' ? 
+            <span>Login successful</span> :
+            <span>Error during login: {ans.message}</span>
+          }
+        </Alert>
+      </Snackbar>
       <Typography variant="body1" align="center" sx={{marginTop:'1rem'}}>
         Need to create an account? 
         <Link color='primary' href='/signup'>Sign up.</Link>

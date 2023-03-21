@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import Copyright from '../Copyright/Copyright';
 import { centeredBox, cardStyle } from './muiStylesObjects';
@@ -19,14 +21,28 @@ import { createUser } from '../../databaseMock/actions';
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // 1 numeric digit, 1 lower case letter, 1 upper case letter, 5 chars minimum.
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const SignupForm = () => {
 
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [ans, setAns] = useState({});
+  const [outcome, setOutcome] = useState('info')
   const navigate = useNavigate();
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackOpen(false);
+  };
 
   const submitAction = async (signupData) => {
     
     const ans = await createUser(signupData);
+    setAns(ans);
     console.log(ans)
     if (ans.success) {
       console.log('Succesful login');
@@ -37,6 +53,8 @@ const SignupForm = () => {
       
       navigate("/app/home");
     }
+    setSnackOpen(true);
+    setOutcome('error');
     console.log(ans.message);
     return 'Error';
   };
@@ -146,6 +164,24 @@ const SignupForm = () => {
           </Form>
         </Card>
       </Formik>
+      <Snackbar 
+        open={snackOpen} 
+        autoHideDuration={4000} 
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        sx={{minWidth:'80vw'}}
+      >
+        <Alert onClose={handleClose} severity={outcome} sx={{ width: '100%' }}>
+          {
+            outcome === 'success' ? 
+            <span>Login successful</span> :
+            <span>Error during login: {ans.message}</span>
+          }
+        </Alert>
+      </Snackbar>
       <Typography variant="body1" align="center" sx={{marginTop:"1rem"}}>Already have an account? 
         <Link color='primary' href='/'> Login.</Link>
       </Typography>
