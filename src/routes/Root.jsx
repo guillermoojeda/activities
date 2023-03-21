@@ -12,6 +12,7 @@ export default function Root() {
     return (
       <>
         <div id="sidebar">
+          <div>Do Something!!</div>
           {/* <h1>Do Something!!</h1> */}
           <nav>
             <ul>

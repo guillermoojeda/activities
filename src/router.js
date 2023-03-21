@@ -2,15 +2,14 @@ import React from 'react';
 import {
   createBrowserRouter,
 } from "react-router-dom";
-
-// import './index.css';
 import ActivitiesList from './components/ActivitiesList/ActivitiesList';
 import ErrorPage from './components/ErrorPage/ErrorPage';
-// import { action as destroyAction } from '../routes/destroy';
 import Root from "./routes/Root";
 import LoginForm from './components/LoginForm/LoginForm';
 import SignupForm from './components/SignupForm/SignupForm';
 import UserDetails from './components/UserDetails/UserDetails';
+import About from './components/About/About';
+
 
 const router = createBrowserRouter([
   {
@@ -51,7 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: "about/",
-        element: <div>About this page placeholder</div>,
+        element: <About/>,
         // loader: contactLoader, // Should create its own function, although it works as contactLoader in this case.
         // action: editAction,
       },

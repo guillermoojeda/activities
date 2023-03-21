@@ -20,6 +20,9 @@
 
 .buttonsContainer {
   margin: 2rem;
+  flex-wrap: nowrap;
+  display: flex;
+  justify-content: center;
 }
 
 
