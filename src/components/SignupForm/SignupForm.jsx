@@ -11,7 +11,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 import Copyright from '../Copyright/Copyright';
-import { centeredBox, cardStyle } from './muiStylesObjects';
+import { centeredBox, cardStyle } from '../muiStylesObjects';
 import TextInput from '../../shared_components/TextInput';
 
 import { useNavigate } from "react-router-dom";
@@ -177,8 +177,8 @@ const SignupForm = () => {
         <Alert onClose={handleClose} severity={outcome} sx={{ width: '100%' }}>
           {
             outcome === 'success' ? 
-            <span>Login successful</span> :
-            <span>Error during login: {ans.message}</span>
+            <span>Signup succesful</span> :
+            <span>Error during user creation: {ans.message}</span>
           }
         </Alert>
       </Snackbar>

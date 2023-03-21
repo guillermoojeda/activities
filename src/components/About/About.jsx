@@ -42,6 +42,7 @@ export default function About() {
         The project was implemented this way because of time constraints, however I plan
         to add better functionalities such as Redux or Signal, and make use of a proper
         library to mock the back-end system and its database.<br/>
+        Frameworks and Libraries: React, MUI, React-router-dom, framer-motion, formik, yup.
         <br/>
         Thank you for visiting, and have a good day!
         <br/>

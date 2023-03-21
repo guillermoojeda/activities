@@ -1,16 +1,9 @@
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Card from "../../shared_components/Card";
 import ActTable from './ActTable';
-
-//import "./UserDetails.css"
-
 
 export default function ActivitiesList(){
 

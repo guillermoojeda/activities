@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-import { centeredBox, CardStyle } from './muiStylesObjects';
+import { centeredBox, cardStyle } from '../muiStylesObjects';
 import Copyright from '../Copyright/Copyright';
 import TextInput from '../../shared_components/TextInput';
 import { requestAccess } from '../../databaseMock/actions';
@@ -27,7 +27,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const LoginForm = () => {
 
   const [snackOpen, setSnackOpen] = useState(false);
-
   const [ans, setAns] = useState({});
   const [outcome, setOutcome] = useState('info')
 
@@ -94,7 +93,7 @@ const LoginForm = () => {
       > 
         <Card
               variant="outlined"
-              sx={CardStyle}
+              sx={cardStyle}
         >
           <Form>
               <TextInput
