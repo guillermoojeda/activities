@@ -98,3 +98,26 @@ export function deleteActivity(userEmail, description) {
   })
   return ans
 }
+
+export function getUserInfo(userEmail) {
+  let ans = {
+    success: false,
+    message: 'An error took place',
+  }
+  Object.keys(database).forEach(mailAddress => {
+    console.log(`DB: getting info of ${mailAddress}...`);
+    if(userEmail === mailAddress) {
+      ans = {
+        success: true,
+        message: 'User info retrieved successfully',
+        userInfo: {
+          name: database[username].name,
+          lastname: database[username].lastname,
+          email: database[username].email,
+          age: database[username].age,
+          activities: database[username].activities,
+        }
+      }
+    }
+  })
+}
