@@ -43,9 +43,7 @@ const SignupForm = () => {
     
     const ans = await createUser(signupData);
     setAns(ans);
-    console.log(ans)
     if (ans.success) {
-      console.log('Succesful login');
       const { name, lastname, email, password } = ans.userData;
       const user = { name, lastname, email, password }
       window.localStorage.setItem('user', JSON.stringify(user));
@@ -55,7 +53,6 @@ const SignupForm = () => {
     }
     setSnackOpen(true);
     setOutcome('error');
-    console.log(ans.message);
     return 'Error';
   };
 
@@ -105,7 +102,6 @@ const SignupForm = () => {
         onSubmit={(values, {setSubmitting}) => {
           setTimeout(() => { // we simulate async call
             setSubmitting(false);
-            console.log(values);
           }, 400);
           const ans = submitAction(values);
           return ans;

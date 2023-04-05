@@ -31,7 +31,6 @@ export default function UserDetails(){
     fetch('http://www.boredapi.com/api/activity')
     .then((response) => response.json())
     .then((newActivity) => {
-      console.log(newActivity);
       setActivity(newActivity);
     })
   }
@@ -45,13 +44,12 @@ export default function UserDetails(){
     const loggedUser = JSON.parse(window.localStorage.user);
     if (loggedUser) {
       const userEmail = loggedUser.email;
-      console.log(userEmail);
-      console.log(activity);
       const newActivities = addActivity(userEmail, activity).activitiesUpdated;
       // window.localStorage['activities'] = JSON.stringify(newActivities);
       window.localStorage.setItem('activities', JSON.stringify(newActivities));
     } else {
       console.log('Error: no usermail on session data found')
+      // console.log left here for simulation purposes only
     }
   }
 

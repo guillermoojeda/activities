@@ -42,9 +42,7 @@ const LoginForm = () => {
   const submitAction = async (loginData) => {
     const ans = await requestAccess(loginData);
     setAns(ans);
-    console.log(ans.message);
     if (ans.success) {
-      console.log('Succesful login');
       const { name, lastname, email, age, activities } = ans.userData;
       const user = { 
         name,
@@ -58,7 +56,6 @@ const LoginForm = () => {
     } else {
       setSnackOpen(true);
       setOutcome('error');
-      console.log(ans.message);
       return 'Error';
     }
   };
@@ -85,7 +82,6 @@ const LoginForm = () => {
         onSubmit={(values, {setSubmitting}) => {
           setTimeout(() => { // we simulate async call
             setSubmitting(false);
-            console.log(values);
           }, 400);
           const ans = submitAction(values);
           return ans;

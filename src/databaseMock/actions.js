@@ -24,7 +24,7 @@ export function requestAccess(loginData) {
 }
 
 export function createUser(userObject) {
-  console.log(userObject);
+  console.log(userObject); // console.log left here for demonstration purposes only.
   if (Object.keys(database).includes(userObject.email)){
     return {success: false, message: 'Username already exists'};
   }
@@ -47,11 +47,11 @@ export function createUser(userObject) {
 }
 
 export function addActivity(userEmail, activity) {
-  console.log(userEmail);
-  console.log(activity);
+  console.log(userEmail); // console.log left here for demonstration purposes only.
+  console.log(activity); // console.log left here for demonstration purposes only.
   database[userEmail].activities.push(activity);
   const activitiesUpdated = database[userEmail].activities;
-  console.log(activitiesUpdated);
+  console.log(activitiesUpdated); // console.log left here for demonstration purposes only.
   return {
     success: 'True',
     message: 'Activity added successfully',
@@ -64,9 +64,9 @@ export function getActivities(userEmail) {
     success: false,
     message: 'Error: User not found',
   }
-  console.log(userEmail);
+  console.log(userEmail); // console.log left here for demonstration purposes only.
   Object.keys(database).forEach(mailAddress => {
-    console.log(database[userEmail].activities)
+    console.log(database[userEmail].activities) // console.log left here for demonstration purposes only.
     if(userEmail === mailAddress) {
       ans = {
         success: true,
@@ -84,7 +84,7 @@ export function deleteActivity(userEmail, description) {
     message: 'An error has ocurred',
   }
   Object.keys(database).forEach(mailAddress => {
-    console.log(database[userEmail].activities)
+    console.log(database[userEmail].activities) // console.log left here for demonstration purposes only.
     if(userEmail === mailAddress) {
       const activities = database[userEmail].activities
       const newActivities = activities.filter(activity => activity.activity !== description);

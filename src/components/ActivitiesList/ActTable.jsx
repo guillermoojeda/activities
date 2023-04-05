@@ -33,22 +33,15 @@ export default function ActTable() {
 
   const mockFetchData = async() => {
     const newData =getActivities(userEmail).activities;
-    console.log(newData);
     setData(newData);
-    console.log(data);
     window.localStorage.setItem('activities', JSON.stringify(newData));
   }
-
-  console.log(getActivities(userEmail).activities);
-
+  
   useEffect(() => {
     mockFetchData();
   }, []);
 
-  console.log(data);
-
   function removeActivity(event) {
-    console.log(event);
     const ans = deleteActivity(userEmail, event);
     const newData = ans.activities;
     setData(newData);
