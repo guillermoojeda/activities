@@ -37,11 +37,12 @@ export function requestAccess(loginData) {
 }
 
 export function createUser(userObject) {
-  console.log(userObject); // console.log left here for demonstration purposes only.
+  console.log('DB: Creating user object:')
+  console.log(userObject); 
+  // console.log left here for demonstration purposes only.
   if (Object.keys(database).includes(userObject.email)){
     return {success: false, message: 'Username already exists'};
   }
-  console.log(userObject);
   const { firstName: name, lastname, age, email, password } = userObject;
   database[email] = {
     name: name,
@@ -82,7 +83,7 @@ export function getActivities(userEmail) {
     success: false,
     message: 'Error: User not found',
   }
-  console.log(userEmail); // console.log left here for demonstration purposes only.
+  console.log(`Getting activities from user ${userEmail}:`); // console.log left here for demonstration purposes only.
   Object.keys(database).forEach(mailAddress => {
     console.log(database[userEmail].activities) // console.log left here for demonstration purposes only.
     if(userEmail === mailAddress) {
@@ -102,7 +103,6 @@ export function deleteActivity(userEmail, description) {
     message: 'An error has ocurred',
   }
   Object.keys(database).forEach(mailAddress => {
-    console.log(database[userEmail].activities) // console.log left here for demonstration purposes only.
     if(userEmail === mailAddress) {
       const activities = database[userEmail].activities
       const newActivities = activities.filter(activity => activity.activity !== description);
@@ -123,7 +123,8 @@ export function getUserInfo(userEmail) {
     message: 'An error took place',
   }
   Object.keys(database).forEach(mailAddress => {
-    console.log(`DB: getting info of ${mailAddress}...`);
+    console.log(`DB: getting info of ${mailAddress}...`);// console.log
+    // left here for demonstration purposes.
     if(userEmail === mailAddress) {
       ans = {
         success: true,
@@ -133,7 +134,6 @@ export function getUserInfo(userEmail) {
           lastname: database[userEmail].lastname,
           email: database[userEmail].email,
           age: database[userEmail].age,
-          // activities: database[userEmail].activities,
         }),
       }
     }

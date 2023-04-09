@@ -1,5 +1,5 @@
 
-
+// Promisify has not yet been implementedin this project.
 
 /**
  * Returns a promise of a function.
