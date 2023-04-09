@@ -1,3 +1,5 @@
+// This is the database when the web app starts
+
 const databaseMock = {
   'pruebas@pruebas.com': {
     name: 'Pruebas',
@@ -29,6 +31,3 @@ const databaseMock = {
 }
 
 module.exports = { databaseMock };
-
-
-// http://www.boredapi.com/api/activity

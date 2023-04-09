@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import ActivitiesList from './components/ActivitiesList/ActivitiesList';
 import ErrorPage from './components/ErrorPage/ErrorPage';
-import Root from "./routes/Root";
+import Root from './routes/ProjectRoot';
 import LoginForm from './components/LoginForm/LoginForm';
 import SignupForm from './components/SignupForm/SignupForm';
 import UserDetails from './components/UserDetails/UserDetails';
@@ -31,8 +31,6 @@ const router = createBrowserRouter([
     path: "/app/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    // loader: rootLoader,
-    // action: rootAction,
     children: [
       {
         index: true, element: <div>Index placeholder</div>,
@@ -40,19 +38,14 @@ const router = createBrowserRouter([
       {
         path: "home/",
         element: <UserDetails/>,
-        // loader: contactLoader,
       }, 
       {
         path: "activities/",
         element: <ActivitiesList/>,
-        // loader: contactLoader, // Should create its own function, although it works as contactLoader in this case.
-        // action: editAction,
       },
       {
         path: "about/",
         element: <About/>,
-        // loader: contactLoader, // Should create its own function, although it works as contactLoader in this case.
-        // action: editAction,
       },
     ],
   },

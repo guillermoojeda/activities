@@ -75,8 +75,6 @@ const SignupForm = () => {
           lastname: '',
           email: '',
           age: 0,
-          // acceptedTerms: false, // Not added yet, maybe later
-          // jobType: '', // Not added ye,t, maybe later
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -110,7 +108,7 @@ const SignupForm = () => {
             .required("Required"),
         })}
         onSubmit={(values, {setSubmitting}) => {
-          setTimeout(() => { // we simulate async call
+          setTimeout(() => { // we simulate async call, to add a wwaiting time
             setSubmitting(false);
           }, 400);
           const ans = submitAction(values);

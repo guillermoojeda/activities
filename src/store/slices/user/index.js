@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import axios from 'axios';
-// import { GET_USER_INFO } from "../../../URLs/urls";
 import { getUserInfo } from "../../../databaseMock/actions";
 
 const initialState = {
-  // isSessionActive: false, -- not needed
   name:'',
   lastname: '',
   email: '',

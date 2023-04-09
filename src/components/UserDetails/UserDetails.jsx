@@ -23,21 +23,13 @@ export default function UserDetails(){
     accessibility: "Loading..."
   });
 
-  // const [userData, setUserData] = useState(
-  //   JSON.parse(window.localStorage.user)
-  // )
-
   const dispatch = useDispatch();
 
   const { user } = useSelector(state => state)
 
   const userData = JSON.parse(window.localStorage.user);
 
-  console.log(user);
-
   const refresh = async() => {
-    console.log('user info is:');
-    console.log(user);
     setIsLoading(true);
     fetch('http://www.boredapi.com/api/activity')
     .then((response) => response.json())
@@ -57,7 +49,6 @@ export default function UserDetails(){
     if (loggedUser) {
       const userEmail = loggedUser.email;
       const newActivities = addActivity(userEmail, activity).activitiesUpdated;
-      // window.localStorage['activities'] = JSON.stringify(newActivities);
       window.localStorage.setItem('activities', JSON.stringify(newActivities));
     } else {
       console.log('Error: no usermail on session data found')
