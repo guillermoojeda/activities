@@ -1,32 +1,44 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from 'axios';
-import { getUserInfo } from "../../../databaseMock/actions";
+// import axios from 'axios';
+import { getActivities } from "../../../databaseMock/actions";
+// import { GET_USERS_AT_PAGE_1 }
 
 export const userSlice = createSlice({
-  name: 'users',
+  name: 'activities',
   initialState: {
-    list: []
+    activities: []
   },
   reducers: {
-    setUserList: (state, action) => {
-      state.list = action.payload;
+    setActivities: (state, action) => {
+      state.activities = action.payload;
+    },
+    clearActivitiesList: (state) => {
+      state.activities = [];
     }
   }
 })
 
-// must export even if used in the same file.
-export const { setUserList } = userSlice.actions
+export const { setActivities, clearActivitiesList } = userSlice.actions
 
 export default userSlice.reducer
 
 
-// Async functions
-export const fetchAllUsers = () => {
+// Mocked Async (not really async) function
+export const fetchActivities = (userEmail) => {
   return ((dispatch) => {
-    axios.get(GET_USERS_AT_PAGE_1)
-    .then((response) => {
-      dispatch(setUserList(response.data.data));
-    })
-    .catch((error) => console.log(error));
+    // This is what is it should be if this was really a promise:
+    // getActivities(userEmail)
+    // .then((response) => {
+    //   dispatch(setActivities(response.data.data));
+    // })
+    // .catch((error) => console.log(error));
+    const newActivities = getActivities(userEmail).activities;
+    dispatch(setActivities(newActivities));
+  })
+}
+
+export const clearActivities = () => {
+  return ((dispatch) => {
+    dispatch(clearActivitiesList());
   })
 }

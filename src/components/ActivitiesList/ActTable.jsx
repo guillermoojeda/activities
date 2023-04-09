@@ -9,6 +9,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { getActivities, deleteActivity } from "../../databaseMock/actions";
+import { fetchActivities } from "../../store/slices/activities";
+import { settings } from "../../config/config";
+import { useDispatch, useSelector } from "react-redux";
 
 function createData(activity, type, participants) {
   return { activity, type, participants };
@@ -29,23 +32,35 @@ export default function ActTable() {
       },
     ]
   );
+  const dispatch = useDispatch();
+
   const userEmail = JSON.parse(window.localStorage.user).email
 
   const mockFetchData = async() => {
-    const newData =getActivities(userEmail).activities;
-    setData(newData);
-    window.localStorage.setItem('activities', JSON.stringify(newData));
+    if (settings.usingRedux) {
+      dispatch(fetchActivities(userEmail))
+    }
+    if (settings.usingLocalStorage) {
+      const newData =getActivities(userEmail).activities;
+      setData(newData);
+      window.localStorage.setItem('activities', JSON.stringify(newData));
+    }
   }
   
   useEffect(() => {
     mockFetchData();
-  }, []);
+  }, [dispatch]);
 
   function removeActivity(event) {
     const ans = deleteActivity(userEmail, event);
-    const newData = ans.activities;
-    setData(newData);
-    window.localStorage.setItem('activities', JSON.stringify(newData));
+    if (settings.usingLocalStorage) {
+      const newData = ans.activities;
+      setData(newData);
+      window.localStorage.setItem('activities', JSON.stringify(newData));
+    }
+    if (settings.usingRedux) {
+      dispatch(fetchActivities(userEmail))
+    }
   }
 
 

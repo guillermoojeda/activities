@@ -18,6 +18,10 @@ import { useNavigate } from "react-router-dom";
 
 import { createUser } from '../../databaseMock/actions';
 
+import { settings } from '../../config/config';
+import { useDispatch } from 'react-redux';
+import { setUserInfo } from '../../store/slices/user';
+
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // 1 numeric digit, 1 lower case letter, 1 upper case letter, 5 chars minimum.
 
@@ -32,6 +36,8 @@ const SignupForm = () => {
   const [outcome, setOutcome] = useState('info')
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -43,12 +49,15 @@ const SignupForm = () => {
     
     const ans = await createUser(signupData);
     setAns(ans);
+    console.log(ans);
     if (ans.success) {
-      const { name, lastname, email, password } = ans.userData;
-      const user = { name, lastname, email, password }
-      window.localStorage.setItem('user', JSON.stringify(user));
-      window.localStorage.setItem('activities', JSON.stringify([]));
-      
+      const { name, lastname, age, email, password } = ans.userData;
+      const user = { name, lastname, age, email, password }
+      if (settings.usingRedux) { dispatch(setUserInfo(ans.userData)) }
+      if (settings.usingLocalStorage) {
+        window.localStorage.setItem('user', JSON.stringify(user));
+        window.localStorage.setItem('activities', JSON.stringify([]));
+      }
       navigate("/app/home");
     }
     setSnackOpen(true);
@@ -65,8 +74,9 @@ const SignupForm = () => {
           firstName: '',
           lastname: '',
           email: '',
-          acceptedTerms: false, // added for our checkbox
-          jobType: '', // added for our select
+          age: 0,
+          // acceptedTerms: false, // Not added yet, maybe later
+          // jobType: '', // Not added ye,t, maybe later
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -131,28 +141,28 @@ const SignupForm = () => {
                 label="Age"
                 name="age"
                 type="number"
-                placeholder="jane@formik.com"
+                placeholder="33"
               />
 
               <TextInput
                 label="Email Address"
                 name="email"
                 type="email"
-                placeholder="jane@formik.com"
+                placeholder="guille@sample.com"
               />
 
               <TextInput
                 label="Password"
                 name="password"
                 type="password"
-                placeholder="jane@formik.com"
+                placeholder="Your password"
               />
 
               <TextInput
                 label="Confirm password"
                 name="confirmPassword"
                 type="password"
-                placeholder="jane@formik.com"
+                placeholder="Repeat password"
               />
                 <Box textAlign='center'>
                   <Button type="submit" variant="contained" sx={{margin: '1rem'}}>Submit</Button>
