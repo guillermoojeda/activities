@@ -16,6 +16,11 @@ import Copyright from '../Copyright/Copyright';
 import TextInput from '../../shared_components/TextInput';
 import { requestAccess } from '../../databaseMock/actions';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { fetchUserInfo, setUserInfo } from '../../store/slices/user';
+import { settings } from '../../config/config';
+
 
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // 1 numeric digit, 1 lower case letter, 1 upper case letter, 5 chars minimum.
@@ -32,6 +37,8 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -43,15 +50,20 @@ const LoginForm = () => {
     const ans = await requestAccess(loginData);
     setAns(ans);
     if (ans.success) {
-      const { name, lastname, email, age, activities } = ans.userData;
+      const { name, lastname, email, age } = ans.userData;
       const user = { 
         name,
         lastname,
         email,
         age,
       };
-      window.localStorage.setItem('user', JSON.stringify(user));
-      window.localStorage.setItem('activities', JSON.stringify(user));
+      console.log(ans);
+      console.log(user);
+      if (settings.usingRedux) { dispatch(setUserInfo(user)) }
+      if (settings.usingLocalStorage) {
+        window.localStorage.setItem('user', JSON.stringify(user));
+        window.localStorage.setItem('activities', JSON.stringify(user));
+      }
       navigate("/app/home");
     } else {
       setSnackOpen(true);

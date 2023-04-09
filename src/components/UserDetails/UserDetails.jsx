@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import Card from "../../shared_components/Card"
 import "./UserDetails.css"
 import { addActivity } from "../../databaseMock/actions";
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function UserDetails(){
 
@@ -22,23 +23,34 @@ export default function UserDetails(){
     accessibility: "Loading..."
   });
 
-  const [userData, setUserData] = useState(
-    JSON.parse(window.localStorage.user)
-  )
+  // const [userData, setUserData] = useState(
+  //   JSON.parse(window.localStorage.user)
+  // )
+
+  const dispatch = useDispatch();
+
+  const { user } = useSelector(state => state)
+
+  const userData = JSON.parse(window.localStorage.user);
+
+  console.log(user);
 
   const refresh = async() => {
+    console.log('user info is:');
+    console.log(user);
     setIsLoading(true);
     fetch('http://www.boredapi.com/api/activity')
     .then((response) => response.json())
     .then((newActivity) => {
       setActivity(newActivity);
+      setIsLoading(false);
     })
   }
 
   useEffect(() => {
     refresh();
     setIsLoading(false);
-  }, [])
+  }, [dispatch])
 
   function addToList() {
     const loggedUser = JSON.parse(window.localStorage.user);

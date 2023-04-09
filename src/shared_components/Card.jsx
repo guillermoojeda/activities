@@ -10,7 +10,7 @@ import cooking from '../images/cooking.jpg';
 import diy from '../images/diy.png';
 import education from '../images/education.jpeg';
 import music from '../images/music.png';
-import recreational from '../images/recreational.png';
+import recreational from '../images/recreational.jpeg';
 import relaxation from '../images/relaxation.jpeg';
 import social from '../images/social.jpeg';
 import unknown from '../images/unknown.png';

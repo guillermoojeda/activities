@@ -30,7 +30,7 @@ export default function ActivitiesList(){
       <Divider />
       <Box sx={{padding:'1rem'}}>
         <br/>
-        <ActTable></ActTable>
+        <ActTable />
         <br/>
       </Box>
     </Paper>
