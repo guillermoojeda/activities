@@ -8,11 +8,11 @@ import { settings } from '../config/config';
 import { clearActivities } from '../store/slices/activities';
 import { clearUserInfo } from '../store/slices/user';
 import { useDispatch } from "react-redux";
-import './Root.css';
+import './ProjectRoot.css';
 
 export default function Root() {
-  //border-bottom: 1px solid #e3e3e3;
-  const navigation = useNavigation(); // returns "idle", "submitting", "loading"
+  
+  const navigation = useNavigation();
 
   const dispatch = useDispatch();
 

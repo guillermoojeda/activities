@@ -1,13 +1,8 @@
 
 // Promisify has not yet been implementedin this project.
-
-/**
- * Returns a promise of a function.
- * @param {function} cb - a function to be promisified
- */
-function promisify(cb) {
-  return cb;
-};
+// Of course, in a commercial product I would never leave unused code
+// like this case, but since this is a demonstrative project, I will take
+// the freedom to do it. Will erase this later if it remains unused.
 
 function myFunction (string) {
   console.log(string);
@@ -25,13 +20,11 @@ function promisifiedMyFunction(string) {
 /**
  * Returns a promise of a function.
  * @param {function} f - a function to be promisified
- * @param {number} b - a number to multiply
- * multiplication(-2, 3);
  */
 function promisify(f) {
   return function (...args) { // return a wrapper-function (*)
     return new Promise((resolve, reject) => {
-      function callback(err, result) { // our custom callback for f (**)
+      function callback(err, result) { // mycustom callback for f (**)
         if (err) {
           reject(err);
         } else {
@@ -39,19 +32,19 @@ function promisify(f) {
         }
       }
 
-      args.push(callback); // append our custom callback to the end of f arguments
+      args.push(callback); // append my custom callback to the end of f arguments
 
       f.call(this, ...args); // call the original function
     });
   };
 }
-// usage:
-// let loadScriptPromise = promisify(loadScript);
-// loadScriptPromise(...).then(...);
+// use sample:
+// let myFunctionPromise = promisify(loadScript);
+// myFunctionPromise(...).then(...);
 
 
 
-// TIME DELAY SIMULATOR
+// TIME DELAY SIMULATOR -- Not yet implemented
 
 function timeout(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

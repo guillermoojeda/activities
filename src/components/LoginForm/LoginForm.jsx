@@ -57,8 +57,6 @@ const LoginForm = () => {
         email,
         age,
       };
-      console.log(ans);
-      console.log(user);
       if (settings.usingRedux) { dispatch(setUserInfo(user)) }
       if (settings.usingLocalStorage) {
         window.localStorage.setItem('user', JSON.stringify(user));

@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import axios from 'axios';
 import { getActivities } from "../../../databaseMock/actions";
-// import { GET_USERS_AT_PAGE_1 }
 
 export const userSlice = createSlice({
   name: 'activities',

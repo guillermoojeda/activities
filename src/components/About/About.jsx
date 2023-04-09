@@ -37,8 +37,8 @@ export default function About() {
         case the user data of any user created will be lost, as well as any activity 
         added to his/her list.
         Also, in the current version, the session information in the frontend side is stored in the browser´s
-        LocalStorage (I know its not a good practice, however this project was made only with
-        a purpose of demonstration).  <br/>
+        LocalStorage AND Redux Store. Of course In a commmercial project I would only use one of these, I
+        but this is a demonstrative project, I only wanted to show that I can handle either of those.  <br/>
         The project was implemented this way because of time constraints, however I plan
         to add better functionalities such as Redux or Signal, and make use of a proper
         library to mock the back-end system and its database.<br/>
