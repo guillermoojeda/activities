@@ -31,7 +31,7 @@ export default function Root() {
         <nav>
           <ul>
             <li>
-              <NavLink to={'home'}>Home</NavLink>
+              <NavLink to='home'>Home</NavLink>
             </li>
             <li>
               <NavLink to={'activities'}>Activities to do</NavLink>

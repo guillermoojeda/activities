@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -140,8 +140,7 @@ const LoginForm = () => {
         </Alert>
       </Snackbar>
       <Typography variant="body1" align="center" sx={{marginTop:'1rem'}}>
-        Need to create an account? 
-        <Link color='primary' href='/signup'>Sign up.</Link>
+        Need to create an account? <Link to='/signup'>Sign up.</Link>
       </Typography>
       <Copyright />
     </Box>

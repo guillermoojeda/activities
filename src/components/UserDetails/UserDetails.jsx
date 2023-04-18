@@ -31,7 +31,7 @@ export default function UserDetails(){
 
   const refresh = async() => {
     setIsLoading(true);
-    fetch('http://www.boredapi.com/api/activity')
+    fetch('https://www.boredapi.com/api/activity')
     .then((response) => response.json())
     .then((newActivity) => {
       setActivity(newActivity);

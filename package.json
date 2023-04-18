@@ -2,7 +2,7 @@
   "name": "midas_challenge",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://guillermoojeda.github.io",
+  "homepage": "https://guillermoojeda.github.io/activities",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

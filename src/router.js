@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   createBrowserRouter,
+  createHashRouter,
 } from "react-router-dom";
 import ActivitiesList from './components/ActivitiesList/ActivitiesList';
 import ErrorPage from './components/ErrorPage/ErrorPage';
@@ -11,7 +12,7 @@ import UserDetails from './components/UserDetails/UserDetails';
 import About from './components/About/About';
 
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <LoginForm />,
